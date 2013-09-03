@@ -46,8 +46,9 @@ function saveToParse(ob) {
 var empleadoObject = new EmpleadoObject();
 empleadoObject.save(ob, {
 success: function(ob) {
-console.log("Saved to parse.");
-
+console.log("Guardado");
+alert("Guardado correctamente");
+limpiaForm();
 },
 error: function(model, error) {
 alert ("Error");
@@ -56,7 +57,12 @@ console.log(error);
 });
 }
 
-
+function limpiaForm() {
+		$("#nombre").val("");
+		$("#apellido1").val("");
+		$("#apellido2").val("");
+		$("#puesto").val("");
+	}
 
 
 	</script>
