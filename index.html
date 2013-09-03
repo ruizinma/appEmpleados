@@ -1,13 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
+<head>
+ <meta charset="utf-8">
     <title>Parse JavaScript Empleados</title>
     <script src="http://www.parsecdn.com/js/parse-1.2.9.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="js/underscore-1.1.6.js"></script>
     <script src="//www.parsecdn.com/js/parse-1.1.15.min.js"></script>
-    <script src="js/empleados.js"></script>
+    <script>
+	var EmpleadoObject;
+
+
+  
+  
+$(document).ready(function() {
+ 
+	Parse.initialize("HUbxReZTh7e3Y8MvlsmzAUHSTE956fWXGK7JJEzj", "3HSqJX7zhmeplld3966WPbKCMTQWf5NOq0Rvo5Y7");
+			EmpleadoObject = Parse.Object.extend("Empleado");
+});
+
+function saveToParse(ob) {
+var empleadoObject = new EmpleadoObject();
+empleadoObject.save(ob, {
+success: function(object) {
+console.log("Saved to parse.");
+
+},
+error: function(model, error) {
+console.log("Error!");
+
+}
+});
+}
+
+$("#newEmployee").on("submit", function(e) {
+			
+			/*
+			gather the values - normally we'd do a bit of validation, but since UFO chasers
+			are known for their rigorous and rational pursuit of science, this will not be necessary
+			*/
+			var report = {};
+				report.nombre = $("#nombre").val();
+				report.apellido1 = $("#apellido1").val();
+				report.apellido2= $("#apellido2").val();
+				report.puesto= $("#puesto").val();
+
+			console.log("Guardado OK: ";
+			//ok, disable the form while submitting and show a loading gfx
+		
+
+			
+				console.log("I'm online, send to parse");
+				saveToParse(report);
+		
+		});
+
+
+
+	</script>
+	<style>
+	body {
+		margin-left: 25px;
+		margin-right: 25px;
+		font-family: arial;
+	}
+	input {
+		width: 100%;
+		height: 25px;
+	}
+	textarea {
+		width: 100%;
+	}
+
+	#loadingGraphic {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		display:none;
+	}
+
+	#status {
+		padding: 10px;
+	}
+	</style>
+</head>
+
+<body>
+
+<h2>Sighting Reporter</h2>
+
+<form id="sightForm">
+Number of UFOs: <input type="number" id="numufos"><br/>
+Your Name: <input type="text" id="yourname"><br/>
+Description: <textarea id="description"></textarea><br/>
+<input type="submit" value="Send Sighting">
+</form>
+
+<div id="status"></div>
+
+<img src="ajax-loader.gif" style="" id="loadingGraphic">
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+   
+   
   </head>
 
   <body>
